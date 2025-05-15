@@ -1,1 +1,1 @@
-Minhas tividades feitas durante as aulas de BackEnd :)
+Minhas atividades feitas durante as aulas de BackEnd :)
