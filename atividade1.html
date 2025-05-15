@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notas</title>
+</head>
+<body>
+    <h1>Checagem de notas</h1>
+    <p>Insira um número:</p>
+    <input type="text" id="nota">
+    <button id="verificarBotao">Verificar</button>
+    <script type="text/javascript">
+        document.getElementById("verificarBotao").addEventListener("click", function() {
+            let nota = document.getElementById("nota").value; 
+            nota = parseInt(nota); 
+
+            if (isNaN(nota)) {
+                alert("Por favor, insira uma nota válida.");
+            } 
+            else if (nota === 10) {
+                alert("Parabéns pelo 10! Você foi aprovado(a)!");
+            } 
+            else if (nota >= 7) { 
+                alert("Com a nota " + nota + ", você foi aprovado(a)!");
+            } 
+            else if (nota >= 4) { 
+                alert("Com a nota " + nota + ", você está em recuperação!");
+            } 
+            else {
+                alert("Com a nota " + nota + ", você está reprovado(a)!");
+            }
+        });
+    </script>
+</body>
+</html>
