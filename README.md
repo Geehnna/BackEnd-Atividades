@@ -1,2 +1,1 @@
-# BeaGeo-atividade2
-Atividade de impar ou par
+Minhas tividades feitas durante as aulas de BackEnd :)
