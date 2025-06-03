@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados</title>
+</head>
+<body>
+    <h1>Simulação de dados</h1>
+    <h2>Escolha o tipo de dado:</h2>
+    <select id="tipoDado">
+        <option value="6">Dado de 6 lados</option>
+        <option value="8">Dado de 8 lados</option>
+        <option value="20">Dado de 20 lados</option>
+    </select>
+    <button onclick="girarDado()">Girar Dado</button>
+    <p id="resultado"></p>
+
+    <script>
+        function dado06Lados() {
+            return Math.floor(Math.random() * 6) + 1;
+        }
+        function dado08Lados() {
+            return Math.floor(Math.random() * 8) + 1;
+        }
+        function dado20Lados() {
+            return Math.floor(Math.random() * 20) + 1;
+        }
+
+        function girarDado() {
+            let tipo = document.getElementById("tipoDado").value;
+            let resultado;
+            if (tipo === "6") {
+                resultado = dado06Lados();
+            } else if (tipo === "8") {
+                resultado = dado08Lados();
+            } else {
+                resultado = dado20Lados();
+            }
+            document.getElementById("resultado").innerText = "Resultado: " + resultado;
+        }
+    </script>
+</body>
+</html>
