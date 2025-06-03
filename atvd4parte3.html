@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login no site</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Bem vindo a nossa página!</h1>
+    <p style="text-align: center;">Você pode fazer login ou se cadastrar.</p>
+
+    <script>
+        // Variável para armazenar os dados do usuário
+        let dadosUsuario = null;
+
+        function verificarIdade(anoNascimento) {
+            const anoAtual = new Date().getFullYear();
+            return (anoAtual - anoNascimento) >= 18;
+        }
+
+        while (true) {
+            let escolha = prompt("Escolha uma opção:\n1 > Sign in\n2 > Login\n3 > Sair");
+
+            if (escolha === "1") {
+                const nome = prompt("Informe seu nome:");
+                const anoNascimento = parseInt(prompt("Informe seu ano de nascimento:"));
+
+                if (verificarIdade(anoNascimento)) {
+                    alert(`Bem-vindo(a), ${nome}!`);
+                    const usuario = prompt("Informe um nome de usuário:");
+                    const senha = prompt("Informe uma senha:");
+                    dadosUsuario = {
+                        nome: nome,
+                        usuario: usuario,
+                        senha: senha
+                    };
+                    alert("Cadastro realizado com sucesso!");
+                } else {
+                    alert("Você é menor de idade e não pode se cadastrar.");
+                }
+            } else if (escolha === "2") {
+                if (!dadosUsuario) {
+                    alert("Nenhum usuário cadastrado. Faça o cadastro primeiro.");
+                    continue;
+                }
+                const usuario = prompt("Informe seu nome de usuário:");
+                const senha = prompt("Informe sua senha:");
+                if (dadosUsuario.usuario === usuario && dadosUsuario.senha === senha) {
+                    alert("Login bem-sucedido! Bem-vindo(a), " + dadosUsuario.nome);
+                } else {
+                    alert("Usuário ou senha incorretos.");
+                }
+            } else if (escolha === "3" || escolha === null) {
+                alert("Saindo...");
+                break;
+            } else {
+                alert("Opção inválida!");
+            }
+        }
+    </script>
+</body>
+</html>
