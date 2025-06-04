@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca</title>
+    <link rel="stylesheet" href="parte03.css">
+</head>
+<body>
+     <h1>Jogo da Forca</h1>
+    <div id="palavra"></div>
+    <div id="tentativas"></div>
+    <input type="text" id="letraInput" maxlength="1" autocomplete="off" placeholder="A-Z">
+    <button id="enviarBtn">Tentar</button>
+    <div id="letrasAdivinhadas"></div>
+
+    <script>
+        const palavras = ["shein", "roblox", "shoppe", "vitamina", "bolinho"];
+        let palavraSecreta = palavras[Math.floor(Math.random() * palavras.length)];
+        let letrasAdivinhadas = [];
+        let tentativas = 6;
+        let palavraExibida = palavraSecreta.split('').map(() => '_').join(' ');
+
+        function exibirPalavra() {
+            document.getElementById('palavra').textContent = palavraExibida;
+        }
+
+        function exibirTentativas() {
+            document.getElementById('tentativas').textContent = "Tentativas restantes: " + tentativas;
+        }
+
+        function exibirLetrasAdivinhadas() {
+            document.getElementById('letrasAdivinhadas').textContent = "Letras já tentadas: " + letrasAdivinhadas.join(', ');
+        }
+
+        function verificarLetra(letra) {
+            letra = letra.toLowerCase();
+            if (!letra.match(/[a-z]/i)) {
+                alert("Digite uma letra válida!");
+                return;
+            }
+            if (letrasAdivinhadas.includes(letra)) {
+                alert("Você já adivinhou essa letra!");
+                return;
+            }
+
+            letrasAdivinhadas.push(letra);
+            exibirLetrasAdivinhadas();
+
+            if (palavraSecreta.includes(letra)) {
+                palavraExibida = palavraSecreta.split('').map((char) => letrasAdivinhadas.includes(char) ? char : '_').join(' ');
+                exibirPalavra();
+
+                if (!palavraExibida.includes('_')) {
+                    setTimeout(() => {
+                        alert("Parabéns! Você adivinhou a palavra: " + palavraSecreta);
+                        reiniciarJogo();
+                    }, 100);
+                }
+            } else {
+                tentativas--;
+                exibirTentativas();
+                if (tentativas === 0) {
+                    setTimeout(() => {
+                        alert("Você perdeu! A palavra era: " + palavraSecreta);
+                        reiniciarJogo();
+                    }, 100);
+                }
+            }
+        }
+
+        function reiniciarJogo() {
+            palavraSecreta = palavras[Math.floor(Math.random() * palavras.length)];
+            letrasAdivinhadas = [];
+            tentativas = 6;
+            palavraExibida = palavraSecreta.split('').map(() => '_').join(' ');
+            exibirPalavra();
+            exibirTentativas();
+            exibirLetrasAdivinhadas();
+            document.getElementById('letraInput').value = '';
+        }
+
+        document.getElementById('enviarBtn').onclick = function() {
+            const letra = document.getElementById('letraInput').value;
+            if (letra) {
+                verificarLetra(letra);
+                document.getElementById('letraInput').value = '';
+                document.getElementById('letraInput').focus();
+            }
+        };
+
+        document.getElementById('letraInput').addEventListener('keyup', function(event) {
+            if (event.key === "Enter") {
+                document.getElementById('enviarBtn').click();
+            }
+        });
+
+        exibirPalavra();
+        exibirTentativas();
+        exibirLetrasAdivinhadas();
+    </script>
+    
+</body>
+</html>
