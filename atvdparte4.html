@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cachorros - Raças e Características</title>
+    <link rel="stylesheet" href="atvd4.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Escolha a raça e cor do cachorro</h2>
+        <label for="raca">Raça:</label>
+        <select id="raca"></select>
+        <label for="cor">Cor:</label>
+        <select id="cor"></select>
+        <button onclick="gerarCachorro()">Gerar Cachorro</button>
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+    // Classe pai, que será o Animal
+    class Animal {
+        constructor(patas, olhos) {
+            this.patas = patas;
+            this.olhos = olhos;
+        }
+    }
+
+    // Classe filha que sera Cachorro
+    class Cachorro extends Animal {
+        constructor(patas, olhos, raca, cor, descricao, foto) {
+            super(patas, olhos);
+            this.raca = raca;
+            this.cor = cor;
+            this.descricao = descricao;
+            this.foto = foto;
+        }
+    }
+    // colocar as raças aquii
+    const racas = {
+        "Labrador": {
+            patas: 4,
+            olhos: 2,
+            cores: [
+                { nome: "Amarelo", foto: "https://images.unsplash.com/photo-1718789439395-9273a041c84d?q=80&w=1588&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+                { nome: "Chocolate", foto: "https://images.unsplash.com/photo-1702324209344-aff3db6b39d5?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" },
+                { nome: "Preto", foto: "data:image/jpeg;base64,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" }
+            ],
+            descricao: "O Labrador é amigável, inteligente e muito brincalhão."
+        },
+        "Poodle": {
+            patas: 4,
+            olhos: 2,
+            cores: [
+                { nome: "Branco", foto: "data:image/webp;base64,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" },
+                { nome: "Preto", foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXC_qfQeHOSktQwcD2l8ZCwHQn1SW48o-c5MRO3mBYzKxqSL65VT8DUH-Xv22RD01ZTiCtbtBODVc5l_tY1w8khtZ7_N1Gy-ggJfDbgFQ" },
+                { nome: "Caramelo", foto: "data:image/webp;base64,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" }
+            ],
+            descricao: "O Poodle é muito inteligente, ativo e adora companhia."
+        },
+        "Bulldog": {
+            patas: 4,
+            olhos: 2,
+            cores: [
+                { nome: "Branco", foto: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdPpWJQY93d_TGlVVyzaS_i74ITqeJjR_Mvg&s" },
+                { nome: "Marrom", foto: "https://media.istockphoto.com/id/1129431139/pt/foto/american-bulldog-portrait.jpg?s=1024x1024&w=is&k=20&c=kg0tYq9pEbxymek6dt8v2ef_qrRGLywESfvT5XyWlmU=" },
+                { nome: "Preto", foto: "https://media.istockphoto.com/id/1776206957/pt/foto/close-up-of-a-black-old-english-bulldog-is-sitting-in-the-park-in-the-grass.jpg?s=612x612&w=0&k=20&c=RU8nHH3GeC_ljEzxW1oL3Ymg1awxPw9pO2Pm3umsccU=" }
+            ],
+            descricao: "O Bulldog é calmo, carinhoso e ótimo para famílias."
+        },
+        "Golden Retriever": {
+            patas: 4,
+            olhos: 2,
+            cores: [
+                { nome: "Dourado", foto: "https://media.istockphoto.com/id/518963294/pt/foto/golden-retriever-c%C3%A3o.jpg?s=612x612&w=0&k=20&c=BlKo3VGbZEBwZrEpX_is06tNBG7Oc6E0z2rXND6Sk6A=" },
+                { nome: "Branco", foto: "https://media.istockphoto.com/id/1403886741/pt/foto/golden-retriever-dog-sitting-on-autumn-ground.jpg?s=612x612&w=0&k=20&c=Pxna12pSBc05LrYWUp-7W34IanW2b3OcsCzzEs2qwCE=" }
+            ],
+            descricao: "O Golden Retriever é dócil, inteligente e muito leal."
+        }
+    };
+
+    // Preencher as opções de raça
+    const selectRaca = document.getElementById('raca');
+    selectRaca.innerHTML = Object.keys(racas)
+        .map(raca => `<option value="${raca}">${raca}</option>`)
+        .join('');
+
+    // Preencher opções de cor conforme a raça
+    const selectCor = document.getElementById('cor');
+    function atualizarCores() {
+        const cores = racas[selectRaca.value].cores;
+        selectCor.innerHTML = cores.map(cor => `<option value="${cor.nome}">${cor.nome}</option>`).join('');
+    }
+    selectRaca.onchange = atualizarCores;
+    atualizarCores();
+
+    // Gerar cachorro e mostrar na tela
+    function gerarCachorro() {
+        const raca = selectRaca.value;
+        const cor = selectCor.value;
+        const dados = racas[raca];
+        const corObj = dados.cores.find(c => c.nome === cor);
+        const cachorro = new Cachorro(dados.patas, dados.olhos, raca, cor, dados.descricao, corObj.foto);
+
+        document.getElementById('resultado').innerHTML = `
+            <img src="${cachorro.foto}">
+            <h3>${cachorro.raca} (${cachorro.cor})</h3>
+            <p><strong>Patas:</strong> ${cachorro.patas} | <strong>Olhos:</strong> ${cachorro.olhos}</p>
+            <p class="descricao">${cachorro.descricao}</p>
+        `;
+    }
+</script>
+</body>
+</html>
