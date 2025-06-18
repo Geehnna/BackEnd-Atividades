@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gatinho Aleatório - Cat API</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Veja fotos aleatórias de gatinhos usando TheCatAPI." />
+  <link rel="stylesheet" href="atividade6.css">
+</head>
+<body>
+  <header>
+    <h1>Gatinho Aleatório</h1>
+    <p>Veja um novo gatinho sempre que quiser!</p>
+  </header>
+  <main>
+    <div class="container">
+      <img id="gatinho" src="" alt="Gatinho aleatório">
+      <button id="btn" onclick="carregarGatinho()">Ver outro gatinho</button>
+    </div>
+  </main>
+  <footer>
+    Powered by <a href="https://thecatapi.com/" target="_blank" style="color:#7e57c2;text-decoration:none;">TheCatAPI</a> | Feito por você 🐾
+  </footer>
+
+  <script>
+    async function carregarGatinho() {
+      try {
+        const response = await fetch("https://api.thecatapi.com/v1/images/search", {
+          headers: {
+            'x-api-key': "live_ylX4blBYT9FaoVd6OhvR1bOoHBz8tQw8y"
+          }
+        });
+        const data = await response.json();
+        document.getElementById('gatinho').src = data[0].url;
+      } catch (error) {
+        document.getElementById('gatinho').alt = "Erro ao carregar imagem";
+        alert("Ocorreu um erro ao carregar a imagem do gatinho.");
+      }
+    }
+
+    // Carrega o primeiro gatinho ao abrir a página
+    carregarGatinho();
+  </script>
+</body>
+</html>

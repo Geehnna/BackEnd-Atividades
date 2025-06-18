@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Consumo de API - Gatinho</title>
+</head>
+<body>
+    <h2 id="nome_gato"></h2>
+    <img id="gatinho" src="" alt="Um gatinho fofo qualquer" style="width:300px; height:auto;">
+    <p>Temperamento:</p>
+    <p id="temperamento"></p>
+
+    <script>
+        let data;
+
+        async function gatinho() {
+            try {
+                const response = await fetch("https://api.thecatapi.com/v1/images/search?has_breeds=true&limit=1", {
+                    headers: {
+                        'x-api-key': "live_2hQw2yQv1Qw8y1n3Qw8y1n3Qw8y1n3Qw8y1n3Qw8y1n3Qw8y1n3Qw8y1n3Qw8y1n3"
+                    }
+                });
+                data = await response.json();
+                console.log(data);
+
+                document.getElementById('gatinho').src = data[0].url;
+                document.getElementById('nome_gato').innerHTML = data[0].breeds[0].name;
+                document.getElementById('temperamento').innerHTML = data[0].breeds[0].temperament;
+            } catch (error) {
+                console.error('Erro:', error);
+            }
+        }
+
+        gatinho();
+    </script>
+</body>
