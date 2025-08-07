@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogo da Memória</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="telaInicio">
+    <h1>Jogo da Memória</h1>
+    <input type="text" id="nomeJogador" placeholder="Digite seu nome">
+    <select id="dificuldade">
+      <option value="facil">Fácil (4x4)</option>
+      <option value="medio">Médio (6x6)</option>
+      <option value="dificil">Difícil (8x8)</option>
+    </select>
+    <button id="iniciarBtn">Iniciar Jogo</button>
+  </div>
+
+  <div id="jogo" style="display: none;">
+    <p>Jogador: <span id="jogadorNome"></span> | Pontuação: <span id="pontuacao">0</span></p>
+    <div id="gameBoard"></div>
+    <p id="message"></p>
+  </div>
+
+  <div id="vitoria" style="display: none;">
+    <h2>Parabéns, <span id="vencedor"></span>!</h2>
+    <p>Sua pontuação: <span id="pontuacaoFinal"></span></p>
+    <h3>Top 5 Pontuações:</h3>
+    <ol id="ranking"></ol>
+    <button onclick="location.reload()">Jogar Novamente</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
