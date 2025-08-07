@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  height: 100vh;
+  width: 100vw;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  background-color: black;
+}
+
+.background {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('fundo.jpg') no-repeat center center/cover;
+  z-index: 0;
+}
+
+.tigreza {
+  position: fixed;
+  top: 40vh;
+  left: 30vw;
+  height: 80px;
+  width: 80px;
+  z-index: 100;
+  user-select: none;
+}
+
+.pipe_sprite {
+  position: fixed;
+  width: 150px;
+  z-index: 50;
+  user-select: none;
+  pointer-events: none;
+}
+
+.pipe_top {
+  background: url('cano2.png') no-repeat center center/contain;
+  height: 200px;
+}
+
+.pipe_bottom {
+  background: url('cano1.jpg') no-repeat center center/contain;
+  height: 250px;
+}
+
+.message {
+  position: fixed;
+  top: 12vh;
+  left: 20vw;
+  font-size: 5vh;
+  color: white;
+  font-weight: bold;
+  z-index: 150;
+  user-select: none;
+}
+
+.score {
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 6vh;
+  color: gold;
+  z-index: 150;
+  user-select: none;
+  padding: 5px 15px;
+}
+
+.score_title {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.menu-dificuldade {
+  position: fixed;
+  top: 5vh;
+  right: 5vw;
+  z-index: 200;
+  user-select: none;
+}
+
+.menu-dificuldade button {
+  margin-left: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #eee;
+  border: none;
+  border-radius: 5px;
+}
+
+.menu-dificuldade button.active {
+  background-color: gold;
+  font-weight: bold;
+}
+
+.highscores {
+  position: fixed;
+  bottom: 2vh;
+  right: 2vw;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 1rem;
+  max-width: 200px;
+  z-index: 150;
+  user-select: none;
+}
+
+.highscores h3 {
+  margin-bottom: 5px;
+}
+
+.highscores ol {
+  padding-left: 20px;
+}
