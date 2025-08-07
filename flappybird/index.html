@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Flappy Bird da Shopee</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="background"></div>
+  <img class="tigreza" src="tigresa.jpeg" alt="tigresa-img" />
+  
+  <div class="menu-dificuldade">
+    <button data-level="easy">Fácil</button>
+    <button data-level="normal" class="active">Normal</button>
+    <button data-level="hard">Difícil</button>
+  </div>
+
+  <div class="message">Pressione Enter pra começar</div>
+  <div class="score">
+    <span class="score_title"></span>
+    <span class="score_val"></span>
+  </div>
+
+  <div class="highscores">
+    <h3>Top 5 Pontuações</h3>
+    <ol id="highscore-list"></ol>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
